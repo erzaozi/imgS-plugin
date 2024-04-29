@@ -1,21 +1,14 @@
 # imgS-plugin
 
-## 🚀支持的引擎
+## 🚀 支持的引擎
 
-| 搜索引擎    | 支持状态  |
-| --------   | -------  |
-| Google     | ✔        |
-| Baidu      | ✔        |
-| Bing       | ✔        |
-| TinEye     | ✔        |
-| Cydral     | ✔        |
-| Yandex     | ✔        |
-| Sogou      | ✔        |
-| 360 ShiTu  | ✔        |
+| 搜索引擎   | 支持状态 |
+| ---------- | -------- |
 | SauceNAO   | ✔        |
-| IQDB       | ✔        |
-| 3D IQDB    | ✔        |
-| WhatAnime  | ✔        |
-| Ascii2D    | ✔        |
-| EHentai    | ✔        |
-| ExHentai   | ✔        |
+| Ascii2d    | ✔        |
+| IqDB       | ✔        |
+| Yandex     | ✔        |
+| TraceMoe   | 即将支持 |
+| AnimeTrace | 即将支持 |
+| EHentai    | 即将支持 |
+| ExHentai   | 即将支持 |

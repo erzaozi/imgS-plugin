@@ -1,4 +1,15 @@
+default: SauceNAO
 proxy:
   enable: false
   host: 127.0.0.1
   port: 7890
+SauceNAO:
+  hide: false
+Ascii2d:
+  type: color
+  proxy: true
+IqDB:
+  discolor: false
+  services: ['danbooru', 'konachan', 'yandere', 'gelbooru', 'sankaku_channel', 'e_shuushuu', 'zerochan', 'anime_pictures']
+Yandex:
+  cookie: ''
