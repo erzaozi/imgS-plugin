@@ -5,12 +5,23 @@ proxy:
   host: 127.0.0.1
   port: 7890
 SauceNAO:
+  similarity: 80
   hide: false
 Ascii2d:
+  results: 3
   type: color
   proxy: true
 IqDB:
+  similarity: 80
   discolor: false
-  services: ['danbooru', 'konachan', 'yandere', 'gelbooru', 'sankaku_channel', 'e_shuushuu', 'zerochan', 'anime_pictures']
+  services:
+    - danbooru
+    - konachan
+    - yandere
+    - gelbooru
+    - sankaku_channel
+    - e_shuushuu
+    - zerochan
+    - anime_pictures
 Yandex:
   cookie: ''

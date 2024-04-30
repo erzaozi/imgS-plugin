@@ -102,7 +102,7 @@ export class Search extends plugin {
                 });
                 break;
             case "Ascii2d":
-                response.forEach(item => {
+                response.slice(0, await Config.getConfig().Ascii2d.results).forEach(async item => {
                     let msg = [];
 
                     if (!safe_mode) {
@@ -128,6 +128,23 @@ export class Search extends plugin {
                 });
                 break;
             case "IqDB":
+                response.forEach(async item => {
+                    const simLimit = await Config.getConfig().IqDB.similarity;
+                    if (item.similarity < simLimit) return;
+
+                    let msg = [];
+                    if (!safe_mode) {
+                        messages.push({ message: [segment.image(item.image)] });
+                    }
+
+                    msg.push(`${item.resolution}\n`);
+                    msg.push(`图片相似度：${item.similarity}%\n`);
+                    msg.push(`图片评级：${item.level}\n\n`);
+                    msg.push('图片来源：\n');
+                    msg.push(`${item.url}\n`);
+
+                    messages.push({ message: msg.join('') });
+                })
                 break;
             case "Yandex":
                 break;
