@@ -1,6 +1,8 @@
 import fetch from 'node-fetch';
 import { FormData } from 'formdata-polyfill/esm.min.js';
 import cheerio from 'cheerio';
+import { fileFromSync } from 'fetch-blob/from.js';
+import downloadImage from '../utils/download.js';
 import _ from 'lodash';
 import Config from './Config.js';
 import { HttpsProxyAgent } from 'https-proxy-agent';
@@ -8,9 +10,11 @@ import { HttpsProxyAgent } from 'https-proxy-agent';
 const PROXY_URL = 'https://ascii2d.obfs.dev';
 const BASE_URL = 'https://ascii2d.net';
 
-async function ascii2d(url) {
+async function Ascii2d(url) {
+    const imagePath = await downloadImage(url);
+
     const form = new FormData();
-    form.append('uri', url);
+    form.append('file', fileFromSync(imagePath));
 
     let agent = null
     if (Config.getConfig().proxy.enable) {
@@ -22,7 +26,7 @@ async function ascii2d(url) {
     const proxy = await Config.getConfig().Ascii2d.proxy;
 
     const colorResponse = await fetch(
-        `${proxy ? PROXY_URL : BASE_URL}/search/uri`,
+        `${proxy ? PROXY_URL : BASE_URL}/search/file`,
         {
             method: 'POST',
             body: form,
@@ -65,4 +69,4 @@ function parse(body) {
     }).filter((value) => value !== undefined);
 }
 
-export { ascii2d };
+export { Ascii2d };

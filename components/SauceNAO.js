@@ -11,7 +11,7 @@ async function SauceNAO(url) {
     let form = new FormData();
     form.append('url', url);
 
-    const hide = await Config.getConfig().sauceNAO.hide;
+    const hide = await Config.getConfig().SauceNAO.hide;
 
     if (hide) form.append('hide', '3');
 
