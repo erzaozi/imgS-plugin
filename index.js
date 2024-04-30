@@ -6,10 +6,10 @@ if (!global.segment) {
 
 let ret = [];
 
-logger.info(logger.yellow("- 正在载入 imgS-PLUGIN"));
+logger.info(logger.yellow("- 正在载入 IMGS-PLUGIN"));
 
 const files = fs
-  .readdirSync('./plugins/IMGS-plugin/apps')
+  .readdirSync('./plugins/imgS-plugin/apps')
   .filter((file) => file.endsWith('.js'));
 
 files.forEach((file) => {

@@ -136,7 +136,7 @@ export class Update extends plugin {
 
     let end = ''
     end =
-      '更多详细信息，请前往github查看\nhttps://github.com/CikeyQi/imgS-plugin/commits/main'
+      '更多详细信息，请前往github查看\nhttps://github.com/erzaozi/imgS-plugin/commits/main'
 
     log = await this.makeForwardMsg(`imgS-plugin更新日志，共${line}条`, log, end)
 
