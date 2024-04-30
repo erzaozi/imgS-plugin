@@ -57,11 +57,58 @@ export class Search extends plugin {
             return true;
         } else {
             const msg = await this.load(e.img[0])
+            if (msg.length === 0) {
+                await e.reply("未找到相关图片")
+                return true;
+            }
+            e.reply(Bot.makeForwardMsg(msg))
+            return true;
         }
     }
 
     async load(url) {
-        const response = await Engine[await Config.getConfig().default](url)
-        console.log(response)
+        let engine = await Config.getConfig().default;
+        const response = await Engine[engine](url)
+        logger.info(response)
+        let messages = []
+        switch (engine) {
+            case "SauceNAO":
+                response.forEach(item => {
+                    if (item.similarity < 60) return;
+
+                    let message = []
+                    message.push(segment.image(item.image))
+                    message.push(item.title + '\n\n')
+                    message.push('图片相似度：' + item.similarity + '\n\n')
+                    message.push('图片来源：\n')
+                    let result = '';
+                    item.content.forEach((element, index) => {
+                        if (index % 2 === 0) {
+                            result += element.text
+                            if (item.content[index + 1]) {
+                                result += item.content[index + 1].text;
+                            }
+                            result += '\n';
+                        } else {
+                            if (element.link) {
+                                result += element.link + '\n';
+                            }
+                        }
+                    });
+                    message.push(result)
+                    messages.push({ message: message })
+                })
+                break;
+            case "Ascii2d":
+                break;
+            case "IqDB":
+                break;
+            case "Yandex":
+                break;
+
+            default:
+                break;
+        }
+        return messages;
     }
 }
