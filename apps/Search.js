@@ -68,38 +68,64 @@ export class Search extends plugin {
 
     async load(url) {
         let engine = await Config.getConfig().default;
+        let safe_mode = await Config.getConfig().safe_mode;
         const response = await Engine[engine](url)
         logger.info(response)
         let messages = []
         switch (engine) {
             case "SauceNAO":
-                response.forEach(item => {
-                    if (item.similarity < 60) return;
+                response.forEach(async item => {
+                    const simLimit = await Config.getConfig().SauceNAO.similarity;
+                    if (item.similarity < simLimit) return;
 
-                    let message = []
-                    message.push(segment.image(item.image))
-                    message.push(item.title + '\n\n')
-                    message.push('图片相似度：' + item.similarity + '\n\n')
-                    message.push('图片来源：\n')
-                    let result = '';
-                    item.content.forEach((element, index) => {
-                        if (index % 2 === 0) {
-                            result += element.text
-                            if (item.content[index + 1]) {
-                                result += item.content[index + 1].text;
+                    let msg = [];
+                    if (!safe_mode) {
+                        messages.push({ message: [segment.image(item.image)] });
+                    }
+
+                    msg.push(`${item.title}\n\n`);
+                    msg.push(`图片相似度：${item.similarity}%\n\n`);
+                    msg.push('图片来源：\n');
+
+                    let src = item.content
+                        .map((el, idx) => {
+                            if (idx % 2 === 0) {
+                                return el.text + (item.content[idx + 1] ? item.content[idx + 1].text : '');
+                            } else {
+                                return el.link ? `${el.link}\n` : '';
                             }
-                            result += '\n';
-                        } else {
-                            if (element.link) {
-                                result += element.link + '\n';
-                            }
-                        }
-                    });
-                    message.push(result)
-                    messages.push({ message: message })
-                })
+                        })
+                        .join('\n');
+
+                    msg.push(src);
+                    messages.push({ message: msg.join('') });
+                });
                 break;
             case "Ascii2d":
+                response.forEach(item => {
+                    let msg = [];
+
+                    if (!safe_mode) {
+                        messages.push({ message: [segment.image(item.image)] });
+                    }
+
+                    msg.push(`${item.hash}\n`);
+                    msg.push(`${item.info}\n`);
+
+                    if (item.source) {
+                        msg.push('\n图片来源：\n');
+                        msg.push(`${item.source.text}\n`);
+                        msg.push(`${item.source.link}\n`);
+                    }
+
+                    if (item.author) {
+                        msg.push('\n图片作者：\n');
+                        msg.push(`${item.author.text}\n`);
+                        msg.push(`${item.author.link}\n`);
+                    }
+
+                    messages.push({ message: msg.join('') });
+                });
                 break;
             case "IqDB":
                 break;

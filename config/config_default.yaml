@@ -1,4 +1,5 @@
 default: SauceNAO
+safe_mode: true
 proxy:
   enable: false
   host: 127.0.0.1
