@@ -24,4 +24,5 @@ IqDB:
     - zerochan
     - anime_pictures
 Yandex:
+  results: 10
   cookie: ''

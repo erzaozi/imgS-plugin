@@ -147,6 +147,26 @@ export class Search extends plugin {
                 })
                 break;
             case "Yandex":
+                response.slice(0, await Config.getConfig().Yandex.results).forEach(async item => {
+                    let msg = [];
+
+                    if (!safe_mode) {
+                        messages.push({ message: [segment.image(`https:${item.thumb.url}`)] });
+                    }
+
+                    msg.push(`${item.snippet.title}\n`);
+                    msg.push(`图片地址：${item.snippet.url}\n`);
+                    msg.push(`图片直链：${item.img_href}\n\n`);
+
+                    if (item.dups) {
+                        msg.push('\n相似图片：\n');
+                        item.dups.forEach(el => {
+                            msg.push(`[${el.w}×${el.h}] ${el.url}\n`);
+                        });
+                    }
+                    
+                    messages.push({ message: msg.join('') });
+                })
                 break;
 
             default:
