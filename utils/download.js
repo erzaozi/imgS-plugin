@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import { writeFileSync, existsSync, mkdirSync } from 'fs';
+import { writeFileSync, existsSync, mkdirSync, unlinkSync } from 'fs';
 import { createHash } from 'crypto';
 import { pluginResources } from '../model/path.js';
 
@@ -24,7 +24,7 @@ const downloadImage = async (url) => {
             if (existsSync(filepath + filename)) {
                 unlinkSync(filepath + filename);
             }
-        }, 5 * 60 * 1000);
+        }, 60 * 1000);
 
         return filepath + filename;
     } catch (err) {

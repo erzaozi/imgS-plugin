@@ -10,11 +10,12 @@
   "module": "index.js",
   "dependencies": {
     "cheerio": "1.0.0-rc.12",
-    "formdata-polyfill": "^4.0.10",
     "fetch-blob": "^4.0.0",
+    "formdata-polyfill": "^4.0.10",
+    "https-proxy-agent": "^7.0.4",
+    "jimp": "^0.22.12",
     "lodash": "^4.17.21",
-    "node-fetch": "^3.3.2",
-    "https-proxy-agent": "^7.0.4"
+    "node-fetch": "^3.3.2"
   },
   "keywords": [
     "Yunzai-Bot",

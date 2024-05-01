@@ -181,9 +181,9 @@ export class Search extends plugin {
                     msg.push(`图片相似度：${item.similarity.toFixed(2)}%\n`);
                     msg.push(`${item.filename}\n`);
                     msg.push(`章节：${item.episode ? item.episode : '未知章节'}\n\n`);
+                    msg.push(`${item.anilist.isAdult ? '[18+] 小孩子不给看' : '[全年龄] 一点都不涩'}\n\n`);
 
                     msg.push('图片来源：\n');
-                    logger.info(item.anilist)
                     msg.push(`${item.anilist.title.native}\n`);
                     msg.push(`英文名：${item.anilist.title.english}\n`);
                     msg.push(`罗马字名：${item.anilist.title.romaji}\n`);
@@ -198,6 +198,21 @@ export class Search extends plugin {
 
                     messages.push({ message: msg.join('') });
                 })
+                break;
+            case "AnimeTrace":
+                response.forEach(async item => {
+                    let msg = [];
+                    if (item.preview) {
+                        messages.push({ message: [segment.image('base64://' + item.preview)] });
+                    }
+
+                    item.char.forEach(el => {
+                        msg.push(`╔ 角色：${el.name}\n╠ 来自动漫：${el.cartoonname}\n╚ 相似度：${el.acc.toFixed(2)}\n`);
+                    })
+
+                    messages.push({ message: msg.join('') });
+                })
+                break;
 
             default:
                 break;

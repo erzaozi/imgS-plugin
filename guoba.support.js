@@ -43,7 +43,8 @@ export function supportGuoba() {
               { label: "Ascii2d", value: "Ascii2d" },
               { label: "IqDB", value: "IqDB" },
               { label: "Yandex", value: "Yandex" },
-              { label: "TraceMoe", value: "TraceMoe"}
+              { label: "TraceMoe", value: "TraceMoe" },
+              { label: "AnimeTrace", value: "AnimeTrace" }
             ],
           },
         },
@@ -252,6 +253,48 @@ export function supportGuoba() {
           field: "TraceMoe.cutBorders",
           label: "裁剪图片边缘",
           bottomHelpMessage: "是否搜索时裁剪图片边缘",
+          component: "Switch",
+        },
+        {
+          component: "Divider",
+          label: "AnimeTrace 相关配置",
+          componentProps: {
+            orientation: "left",
+            plain: true,
+          },
+        },
+        {
+          field: "AnimeTrace.model",
+          label: "搜索模型",
+          bottomHelpMessage: "选择搜索模型",
+          component: "Select",
+          componentProps: {
+            options: [
+              { label: "通用识别场景[gochiusa]", value: 'large_model_preview' },
+              { label: "低准确率动漫模型", value: "anime" },
+              { label: "高级动画模型[lovelive]", value: "anime_model_lovelive" },
+              { label: "高级动画模型[yamanosusume]", value: "pre_stable" },
+              { label: "1号GalGame模型", value: "game" },
+              { label: "2号GalGame模型[kirakira]", value: "game_model_kirakira" },
+            ],
+          },
+        },
+        {
+          field: "AnimeTrace.mode",
+          label: "搜索模式",
+          bottomHelpMessage: "选择搜索模式",
+          component: "Select",
+          componentProps: {
+            options: [
+              { label: "单结果模式", value: 0 },
+              { label: "多结果模式", value: 1 },
+            ],
+          },
+        },
+        {
+          field: "AnimeTrace.preview",
+          label: "预览模式",
+          bottomHelpMessage: "开启后，结果携带剪裁后的角色图片",
           component: "Switch",
         },
       ],

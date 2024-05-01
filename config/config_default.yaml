@@ -29,3 +29,7 @@ Yandex:
 TraceMoe:
   similarity: 80
   cutBorders: true
+AnimeTrace:
+  model: anime_model_lovelive
+  mode: 1
+  preview: true

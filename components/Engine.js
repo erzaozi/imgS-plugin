@@ -3,6 +3,7 @@ import { SauceNAO } from './SauceNAO.js';
 import { IqDB } from './IqDB.js';
 import { Yandex } from './Yandex.js';
 import { TraceMoe } from './TraceMoe.js';
+import { AnimeTrace } from './AnimeTrace.js';
 
 const Engine = {
     Ascii2d,
@@ -10,6 +11,7 @@ const Engine = {
     IqDB,
     Yandex,
     TraceMoe,
+    AnimeTrace,
 };
 
 export default Engine;
