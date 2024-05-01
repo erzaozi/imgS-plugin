@@ -43,6 +43,7 @@ export function supportGuoba() {
               { label: "Ascii2d", value: "Ascii2d" },
               { label: "IqDB", value: "IqDB" },
               { label: "Yandex", value: "Yandex" },
+              { label: "TraceMoe", value: "TraceMoe"}
             ],
           },
         },
@@ -226,6 +227,32 @@ export function supportGuoba() {
           componentProps: {
             placeholder: '请输入Yandex的Cookie',
           },
+        },
+        {
+          component: "Divider",
+          label: "TraceMoe 相关配置",
+          componentProps: {
+            orientation: "left",
+            plain: true,
+          },
+        },
+        {
+          field: "TraceMoe.similarity",
+          label: "相似度限制",
+          bottomHelpMessage: "当结果小于此值时，将舍弃该结果（0-100）",
+          component: "InputNumber",
+          componentProps: {
+            placeholder: '请输入相似度限制',
+            min: 0,
+            max: 100,
+            step: 1,
+          },
+        },
+        {
+          field: "TraceMoe.cutBorders",
+          label: "裁剪图片边缘",
+          bottomHelpMessage: "是否搜索时裁剪图片边缘",
+          component: "Switch",
         },
       ],
       getConfigData() {

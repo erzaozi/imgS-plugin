@@ -19,6 +19,13 @@ const downloadImage = async (url) => {
         }
 
         writeFileSync(filepath + filename, buf);
+
+        setTimeout(() => {
+            if (existsSync(filepath + filename)) {
+                unlinkSync(filepath + filename);
+            }
+        }, 5 * 60 * 1000);
+
         return filepath + filename;
     } catch (err) {
         logger.error('[imgS-Plugin] 下载出错', err);

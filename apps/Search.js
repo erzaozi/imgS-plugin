@@ -84,7 +84,7 @@ export class Search extends plugin {
                     }
 
                     msg.push(`${item.title}\n\n`);
-                    msg.push(`图片相似度：${item.similarity}%\n\n`);
+                    msg.push(`图片相似度：${item.similarity.toFixed(2)}%\n`);
                     msg.push('图片来源：\n');
 
                     let src = item.content
@@ -138,7 +138,7 @@ export class Search extends plugin {
                     }
 
                     msg.push(`${item.resolution}\n`);
-                    msg.push(`图片相似度：${item.similarity}%\n`);
+                    msg.push(`图片相似度：${item.similarity.toFixed(2)}%\n`);
                     msg.push(`图片评级：${item.level}\n\n`);
                     msg.push('图片来源：\n');
                     msg.push(`${item.url}\n`);
@@ -164,10 +164,40 @@ export class Search extends plugin {
                             msg.push(`[${el.w}×${el.h}] ${el.url}\n`);
                         });
                     }
-                    
+
                     messages.push({ message: msg.join('') });
                 })
                 break;
+            case "TraceMoe":
+                response.forEach(async item => {
+                    const simLimit = await Config.getConfig().IqDB.similarity;
+                    if (item.similarity < simLimit) return;
+
+                    let msg = [];
+                    if (!safe_mode) {
+                        messages.push({ message: [segment.video(item.video)] });
+                    }
+
+                    msg.push(`图片相似度：${item.similarity.toFixed(2)}%\n`);
+                    msg.push(`${item.filename}\n`);
+                    msg.push(`章节：${item.episode ? item.episode : '未知章节'}\n\n`);
+
+                    msg.push('图片来源：\n');
+                    logger.info(item.anilist)
+                    msg.push(`${item.anilist.title.native}\n`);
+                    msg.push(`英文名：${item.anilist.title.english}\n`);
+                    msg.push(`罗马字名：${item.anilist.title.romaji}\n`);
+                    msg.push(`${stamp2hms(item.from)} - {stamp2hms(item.to)}\n`);
+
+                    function stamp2hms(stamp) {
+                        const iso = new Date(stamp).toISOString();
+                        const [, timeZ] = iso.split('T');
+                        const [time] = timeZ.split('Z');
+                        return time;
+                    }
+
+                    messages.push({ message: msg.join('') });
+                })
 
             default:
                 break;

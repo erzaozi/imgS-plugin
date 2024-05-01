@@ -24,5 +24,8 @@ IqDB:
     - zerochan
     - anime_pictures
 Yandex:
-  results: 10
+  results: 3
   cookie: ''
+TraceMoe:
+  similarity: 80
+  cutBorders: true
