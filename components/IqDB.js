@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 import { FormData } from 'formdata-polyfill/esm.min.js';
-import cheerio from 'cheerio';
+import { load } from 'cheerio';
 import _ from 'lodash';
 import Config from './Config.js';
 import { HttpsProxyAgent } from 'https-proxy-agent';
@@ -33,7 +33,7 @@ async function IqDB(url) {
 }
 
 function parse(body) {
-    const $ = cheerio.load(body);
+    const $ = load(body);
     return _.map($('table'), (result) => {
         const content = $(result).text(),
             [link] = $('td.image > a', result),

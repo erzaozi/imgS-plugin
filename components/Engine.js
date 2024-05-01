@@ -4,6 +4,7 @@ import { IqDB } from './IqDB.js';
 import { Yandex } from './Yandex.js';
 import { TraceMoe } from './TraceMoe.js';
 import { AnimeTrace } from './AnimeTrace.js';
+import { EHentai } from './EHentai.js';
 
 const Engine = {
     Ascii2d,
@@ -12,6 +13,7 @@ const Engine = {
     Yandex,
     TraceMoe,
     AnimeTrace,
+    EHentai,
 };
 
 export default Engine;

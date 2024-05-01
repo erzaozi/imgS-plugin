@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 import { FormData } from 'formdata-polyfill/esm.min.js';
-import cheerio from 'cheerio';
+import { load } from 'cheerio';
 import _ from 'lodash';
 import Config from './Config.js';
 import { HttpsProxyAgent } from 'https-proxy-agent';
@@ -31,7 +31,7 @@ async function SauceNAO(url) {
 }
 
 function parse(body) {
-    const $ = cheerio.load(body, { decodeEntities: true });
+    const $ = load(body, { decodeEntities: true });
     return _.map($('.result'), (result) => {
         const image = $('.resultimage img', result);
         const title = $('.resulttitle', result);

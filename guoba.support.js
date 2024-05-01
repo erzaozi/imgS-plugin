@@ -44,7 +44,8 @@ export function supportGuoba() {
               { label: "IqDB", value: "IqDB" },
               { label: "Yandex", value: "Yandex" },
               { label: "TraceMoe", value: "TraceMoe" },
-              { label: "AnimeTrace", value: "AnimeTrace" }
+              { label: "AnimeTrace", value: "AnimeTrace" },
+              { label: "EHentai", value: "EHentai" },
             ],
           },
         },
@@ -296,6 +297,53 @@ export function supportGuoba() {
           label: "预览模式",
           bottomHelpMessage: "开启后，结果携带剪裁后的角色图片",
           component: "Switch",
+        },
+        {
+          component: "Divider",
+          label: "EHentai 相关配置",
+          componentProps: {
+            orientation: "left",
+            plain: true,
+          },
+        },
+        {
+          field: "EHentai.site",
+          label: "站点设置",
+          bottomHelpMessage: "选择搜索站点，Ex站点需要配置Cookie",
+          component: "Select",
+          componentProps: {
+            options: [
+              { label: "E-Hentai", value: 'eh' },
+              { label: "ExHentai", value: 'ex' },
+            ],
+          },
+        },
+        {
+          field: "EHentai.cover",
+          label: "仅搜索封面",
+          bottomHelpMessage: "开启后，仅搜索封面，不搜索内容",
+          component: "Switch",
+        },
+        {
+          field: "EHentai.deleted",
+          label: "搜索已删除内容",
+          bottomHelpMessage: "开启后，搜索结果会包含已删除内容",
+          component: "Switch",
+        },
+        {
+          field: "EHentai.similar",
+          label: "搜索相似内容",
+          bottomHelpMessage: "开启后，搜索结果会包含相似内容",
+          component: "Switch",
+        },
+        {
+          field: "EHentai.cookie",
+          label: "Cookie",
+          bottomHelpMessage: "用于访问ExHentai站点权限，请确保你的账号有权访问里站",
+          component: "Input",
+          componentProps: {
+            placeholder: '请输入EHentai的Cookie',
+          },
         },
       ],
       getConfigData() {

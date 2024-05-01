@@ -213,6 +213,23 @@ export class Search extends plugin {
                     messages.push({ message: msg.join('') });
                 })
                 break;
+            case "EHentai":
+                response.forEach(async item => {
+                    let msg = [];
+                    if (!safe_mode) {
+                        messages.push({ message: [segment.image(item.image)] });
+                    }
+
+                    msg.push(`${item.title}\n`);
+                    msg.push(`${item.link}\n\n`);
+                    msg.push(`类型：${item.type}\n`);
+                    msg.push(`上传日期：${item.tag}\n`);
+                    msg.push(`标签：\n`);
+                    msg.push(item.tags.join(', '));
+
+                    messages.push({ message: msg.join('') });
+                })
+                break;
 
             default:
                 break;

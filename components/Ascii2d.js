@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 import { FormData } from 'formdata-polyfill/esm.min.js';
-import cheerio from 'cheerio';
+import { load } from 'cheerio';
 import { fileFromSync } from 'fetch-blob/from.js';
 import downloadImage from '../utils/download.js';
 import _ from 'lodash';
@@ -49,7 +49,7 @@ async function Ascii2d(url) {
 }
 
 function parse(body) {
-    const $ = cheerio.load(body, { decodeEntities: true });
+    const $ = load(body, { decodeEntities: true });
     return _.map($('.item-box'), (item) => {
         const detail = $('.detail-box', item),
             hash = $('.hash', item),

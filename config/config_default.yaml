@@ -33,3 +33,9 @@ AnimeTrace:
   model: anime_model_lovelive
   mode: 1
   preview: true
+EHentai:
+  site: eh
+  cover: false
+  deleted: false
+  similar: true
+  cookie: ''

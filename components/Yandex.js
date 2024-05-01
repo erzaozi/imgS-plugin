@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import cheerio from 'cheerio';
+import { load } from 'cheerio';
 import _ from 'lodash';
 import Config from './Config.js';
 import { HttpsProxyAgent } from 'https-proxy-agent';
@@ -30,7 +30,7 @@ async function Yandex(url) {
 }
 
 function parse(body) {
-    const $ = cheerio.load(body, { decodeEntities: true });
+    const $ = load(body, { decodeEntities: true });
     return _.map($('.serp-list .serp-item'), (item) => {
         return JSON.parse($(item).attr('data-bem'))['serp-item'];
     }).filter((value) => value !== undefined);
