@@ -230,6 +230,19 @@ export class Search extends plugin {
                     messages.push({ message: msg.join('') });
                 })
                 break;
+            case "Baidu":
+                response.slice(0, await Config.getConfig().Baidu.results).forEach(async item => {
+                    let msg = [];
+
+                    if (!safe_mode) {
+                        messages.push({ message: [segment.image(item.thumbUrl)] });
+                    }
+                    msg.push(`图片大小：${item.width} × ${item.height}\n`);
+                    msg.push(`图片地址：${item.fromUrl}\n`);
+
+                    messages.push({ message: msg.join('') });
+                })
+                break;
 
             default:
                 break;

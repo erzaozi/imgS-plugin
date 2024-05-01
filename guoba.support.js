@@ -46,6 +46,7 @@ export function supportGuoba() {
               { label: "TraceMoe", value: "TraceMoe" },
               { label: "AnimeTrace", value: "AnimeTrace" },
               { label: "EHentai", value: "EHentai" },
+              { label: "Baidu", value: "Baidu"}
             ],
           },
         },
@@ -343,6 +344,26 @@ export function supportGuoba() {
           component: "Input",
           componentProps: {
             placeholder: '请输入EHentai的Cookie',
+          },
+        },
+        {
+          component: "Divider",
+          label: "Baidu 相关配置",
+          componentProps: {
+            orientation: "left",
+            plain: true,
+          },
+        },
+        {
+          field: "Baidu.results",
+          label: "结果数限制",
+          bottomHelpMessage: "仅显示前 N 个结果",
+          component: "InputNumber",
+          componentProps: {
+            placeholder: '请输入结果数限制',
+            min: 0,
+            max: 100,
+            step: 1,
           },
         },
       ],

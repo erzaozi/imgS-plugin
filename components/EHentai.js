@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import { fileFrom } from 'fetch-blob/from.js';
+import { fileFromSync } from 'fetch-blob/from.js';
 import { FormData } from 'formdata-polyfill/esm.min.js';
 import downloadImage from '../utils/download.js';
 import { load } from 'cheerio';
@@ -16,7 +16,7 @@ async function EHentai(url) {
     const imagePath = await downloadImage(url);
 
     const form = new FormData();
-    form.append('sfile', await fileFrom(imagePath));
+    form.append('sfile', fileFromSync(imagePath));
     return await request(form);
 }
 
