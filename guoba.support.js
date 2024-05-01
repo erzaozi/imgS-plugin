@@ -178,6 +178,27 @@ export function supportGuoba() {
           component: "Switch",
         },
         {
+          field: 'IqDB.services',
+          label: '图片数据来源',
+          component: "Select",
+          bottomHelpMessage: '选择图片数据来源',
+          componentProps: {
+            allowAdd: true,
+            allowDel: true,
+            mode: 'multiple',
+            options: [
+              { label: "Danbooru（动漫艺术作品）", value: 'danbooru' },
+              { label: "Konachan（动漫壁纸）", value: 'konachan' },
+              { label: "yande.re（高分辨率扫描）", value: 'yandere' },
+              { label: "Gelbooru（动漫艺术作品）", value: 'gelbooru' },
+              { label: "Sankaku Channel（动漫/漫画/游戏图像）", value: 'sankaku_channel' },
+              { label: "e-shuushuu（动漫/漫画/游戏图像）", value: 'e_shuushuu' },
+              { label: "Zerochan（动漫图片和壁纸）", value: 'zerochan' },
+              { label: "Anime-Pictures（动漫图片和壁纸）", value: 'anime_pictures' },
+            ],
+          },
+        },
+        {
           component: "Divider",
           label: "Yandex 相关配置",
           componentProps: {
@@ -218,6 +239,7 @@ export function supportGuoba() {
           lodash.set(config, keyPath, value)
         }
         config = lodash.merge({}, Config.getConfig(), config)
+        config.IqDB.services = data['IqDB.services']
         Config.setConfig(config)
         return Result.ok({}, '保存成功~')
       },
