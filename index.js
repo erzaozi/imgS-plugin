@@ -6,7 +6,7 @@ if (!global.segment) {
 
 let ret = [];
 
-logger.info(logger.yellow("- 正在载入 imgS-PLUGIN"));
+logger.info(logger.yellow("- 正在载入 IMGS-PLUGIN"));
 
 const files = fs
   .readdirSync('./plugins/imgS-plugin/apps')
@@ -30,7 +30,7 @@ for (let i in files) {
   apps[name] = ret[i].value[Object.keys(ret[i].value)[0]];
 }
 
-logger.info(logger.green("- imgS-PLUGIN 载入成功"));
+logger.info(logger.green("- IMGS-PLUGIN 载入成功"));
 logger.info(logger.magenta(`- 欢迎加入新组织【貓娘樂園🍥🏳️‍⚧️】（群号 551081559）`));
 
 export { apps };

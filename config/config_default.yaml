@@ -1,4 +1,45 @@
+default: SauceNAO
+safe_mode: true
 proxy:
   enable: false
   host: 127.0.0.1
   port: 7890
+SauceNAO:
+  similarity: 80
+  hide: false
+Ascii2d:
+  results: 3
+  type: color
+  proxy: true
+IqDB:
+  similarity: 80
+  discolor: false
+  services:
+    - danbooru
+    - konachan
+    - yandere
+    - gelbooru
+    - sankaku_channel
+    - e_shuushuu
+    - zerochan
+    - anime_pictures
+Yandex:
+  results: 3
+  cookie: ''
+TraceMoe:
+  similarity: 80
+  cutBorders: true
+AnimeTrace:
+  model: anime_model_lovelive
+  mode: 1
+  preview: true
+EHentai:
+  site: eh
+  cover: false
+  deleted: false
+  similar: true
+  cookie: ''
+Baidu:
+  results: 3
+Google:
+  safe: false
