@@ -71,11 +71,12 @@ export class Search extends plugin {
 
         if (!e.img) {
             this.setContext("getImage", e.isGroup, 60, "操作已超时，请重新发送搜图指令");
-            return this.reply("未能获取到图片，请发送你要搜索的图片")
+            return this.reply("请发送你要搜索的图片")
         } else {
+            await this.reply("正在使用 " + setEngine[e.user_id] + " 搜索引擎搜索图片，请稍等...")
             const msg = await this.load(e.img[0])
             if (msg.length === 0) {
-                await e.reply("当前搜索引擎[" + setEngine[e.user_id] + "]未找到相关图片，换个搜索引擎试试吧？")
+                await e.reply("当前搜索引擎 " + setEngine[e.user_id] + " 未找到相关图片，换个搜索引擎试试吧？")
                 return true;
             }
             await e.reply(Bot.makeForwardMsg(msg))
@@ -88,9 +89,10 @@ export class Search extends plugin {
         if (!this.e.img) {
             return this.reply("未能获取到图片，请重新发送搜图指令")
         } else {
+            await this.reply("正在使用 " + setEngine[this.e.user_id] + " 搜索引擎搜索图片，请稍等...")
             const msg = await this.load(this.e.img[0])
             if (msg.length === 0) {
-                await this.e.reply("当前搜索引擎[" + setEngine[this.e.user_id] + "]未找到相关图片，换个搜索引擎试试吧？")
+                await this.e.reply("当前搜索引擎 " + setEngine[this.e.user_id] + " 未找到相关图片，换个搜索引擎试试吧？")
                 return true;
             }
             await this.e.reply(Bot.makeForwardMsg(msg))
@@ -210,14 +212,14 @@ export class Search extends plugin {
 
                         msg.push(`图片相似度：${item.similarity.toFixed(2)}%\n`);
                         msg.push(`${item.filename}\n`);
-                        msg.push(`章节：${item.episode ? item.episode : '未知章节'}\n\n`);
-                        msg.push(`${item.anilist.isAdult ? '[18+] 小孩子不给看' : '[全年龄] 一点都不涩'}\n\n`);
+                        msg.push(`章节：${item.episode ? item.episode : '未知章节'}\n`);
+                        msg.push(`${item.anilist.isAdult ? '[18+] 小孩子不给看' : '[全年龄]'}\n\n`);
 
                         msg.push('图片来源：\n');
                         msg.push(`${item.anilist.title.native}\n`);
                         msg.push(`英文名：${item.anilist.title.english}\n`);
                         msg.push(`罗马字名：${item.anilist.title.romaji}\n`);
-                        msg.push(`${stamp2hms(item.from)} - {stamp2hms(item.to)}\n`);
+                        msg.push(`${stamp2hms(item.from)} - ${stamp2hms(item.to)}\n`);
 
                         function stamp2hms(stamp) {
                             const iso = new Date(stamp).toISOString();

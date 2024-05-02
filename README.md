@@ -57,6 +57,25 @@ pnpm install --filter=imgS-plugin
 - [x] Google
 - [ ] 3D IqDB
 
+## 功能展示
+
+
+<details><summary>点击展开</summary>
+
+| 搜图引擎 | 支持领域 | 结果展示 |
+| ---------- | ---------- | ---------- |
+| SauceNAO    | 支持Pixiv、Twitter等多个平台的图像搜索 | ![renderings](https://cdn.jsdelivr.net/gh/erzaozi/imgS-plugin/resources/readme/saucenao.png) |
+| Ascii2d     | 主要提供色阶、特征搜索，支持Pixiv、Twitter（部分支持）等 | ![renderings](https://cdn.jsdelivr.net/gh/erzaozi/imgS-plugin/resources/readme/ascii2d.png) |
+| IqDB        | 多模式图片搜索，支持多个二次元相关站点 | ![renderings](https://cdn.jsdelivr.net/gh/erzaozi/imgS-plugin/resources/readme/iqdb.png) |
+| TraceMoe   | 定位以及搜寻动画截图的搜索引擎 | ![renderings](https://cdn.jsdelivr.net/gh/erzaozi/imgS-plugin/resources/readme/tracemoe.png) |
+| AnimeTrace | 主要用于番剧、Galgame游戏角色搜索，能自动识别角色脸部并搜索对应图片 | ![renderings](https://cdn.jsdelivr.net/gh/erzaozi/imgS-plugin/resources/readme/animetrace.png) |
+| Yandex      | 强大的图像搜索引擎，支持广泛的图像搜索 | ![renderings](https://cdn.jsdelivr.net/gh/erzaozi/imgS-plugin/resources/readme/yandex.png) |
+| E-Hentai    | 主要用于搜索成人向的插画和漫画等 | ![renderings](https://cdn.jsdelivr.net/gh/erzaozi/imgS-plugin/resources/readme/ehentai.png) |
+| Baidu       | 提供以图搜图功能，支持广泛的内容搜索 | ![renderings](https://cdn.jsdelivr.net/gh/erzaozi/imgS-plugin/resources/readme/baidu.png) |
+| Google       | 非常广泛应用的以图搜图引擎，支持各种类型的图片搜索 | ![renderings](https://cdn.jsdelivr.net/gh/erzaozi/imgS-plugin/resources/readme/google.png) |
+
+</details>
+
 ## 常见问题
 
 1. 哪些搜图引擎需要配置？
