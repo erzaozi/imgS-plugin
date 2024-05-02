@@ -6,6 +6,7 @@ import { TraceMoe } from './TraceMoe.js';
 import { AnimeTrace } from './AnimeTrace.js';
 import { EHentai } from './EHentai.js';
 import { Baidu } from './Baidu.js';
+import { Google } from "./Google.js";
 
 const Engine = {
     Ascii2d,
@@ -16,6 +17,16 @@ const Engine = {
     AnimeTrace,
     EHentai,
     Baidu,
+    Google,
+    A2: Ascii2d,
+    SN: SauceNAO,
+    IQ: IqDB,
+    YD: Yandex,
+    TM: TraceMoe,
+    AT: AnimeTrace,
+    EH: EHentai,
+    BD: Baidu,
+    GL: Google
 };
 
 export default Engine;

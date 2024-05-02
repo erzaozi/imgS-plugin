@@ -366,6 +366,20 @@ export function supportGuoba() {
             step: 1,
           },
         },
+        {
+          component: "Divider",
+          label: "Google 相关配置",
+          componentProps: {
+            orientation: "left",
+            plain: true,
+          },
+        },
+        {
+          field: "Google.safe",
+          label: "内容安全",
+          bottomHelpMessage: "开启后，搜索结果中将不会出现违规内容",
+          component: "Switch",
+        },
       ],
       getConfigData() {
         let config = Config.getConfig()

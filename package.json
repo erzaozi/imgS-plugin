@@ -15,7 +15,8 @@
     "https-proxy-agent": "^7.0.4",
     "jimp": "^0.22.12",
     "lodash": "^4.17.21",
-    "node-fetch": "^3.3.2"
+    "node-fetch": "^3.3.2",
+    "puppeteer": "*"
   },
   "keywords": [
     "Yunzai-Bot",

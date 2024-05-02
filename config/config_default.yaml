@@ -41,3 +41,5 @@ EHentai:
   cookie: ''
 Baidu:
   results: 3
+Google:
+  safe: false

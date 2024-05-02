@@ -19,6 +19,10 @@ export class Search extends plugin {
                     reg: '^[/#]?搜图$',
                     /** 执行方法 */
                     fnc: 'search'
+                },
+                {
+                    reg: new RegExp(`^[/#]?(${Object.keys(Engine).join('|')})搜图$`, 'i'),
+                    fnc: 'specifiedSearch'
                 }
             ]
         })
@@ -66,8 +70,59 @@ export class Search extends plugin {
         }
     }
 
-    async load(url) {
-        let engine = await Config.getConfig().default;
+    async specifiedSearch(e) {
+        if (!e.img) {
+            if (e.source) {
+                let reply;
+                if (e.isGroup) {
+                    reply = (await e.group.getChatHistory(e.source.seq, 1)).pop()?.message;
+                } else {
+                    reply = (await e.friend.getChatHistory(e.source.time, 1)).pop()?.message;
+                }
+                if (reply) {
+                    for (const val of reply) {
+                        if (val.type == "image") {
+                            e.img = [val.url];
+                            break;
+                        }
+                    }
+                }
+            }
+            if (e.reply_id) {
+                let reply = (await e.getReply(e.reply_id)).message;
+                for (const val of reply) {
+                    if (val.type === "image") {
+                        e.img = [val.url];
+                        break;
+                    }
+                }
+            }
+        }
+        if (!e.img) {
+            await e.reply("请发送图片或回复图片");
+            return true;
+        } else {
+            let engine = null
+            for (let key of Object.keys(Engine)) {
+                let regex = new RegExp(key, "i");
+                if (regex.test(e.msg)) {
+                    engine = Engine[key].name
+                    break
+                }
+            }
+
+            const msg = await this.load(e.img[0], engine)
+            if (msg.length === 0) {
+                await e.reply("未找到相关图片")
+                return true;
+            }
+            e.reply(Bot.makeForwardMsg(msg))
+            return true;
+        }
+    }
+
+    async load(url, specifiedEngine = null) {
+        let engine = specifiedEngine || await Config.getConfig().default;
         let safe_mode = await Config.getConfig().safe_mode;
         const response = await Engine[engine](url)
         logger.info(response)
@@ -241,6 +296,14 @@ export class Search extends plugin {
                     msg.push(`图片地址：${item.fromUrl}\n`);
 
                     messages.push({ message: msg.join('') });
+                })
+                break;
+            case "Google":
+                response.forEach(async item => {
+                    if (!safe_mode) {
+                        messages.push({ message: [segment.image('base64://' + item.pic.replace('data:image/jpeg;base64,', ''))] });
+                    }
+                    messages.push({ message: [`[${item.title}]` + (item.url ? `(${item.url})` : '')] })
                 })
                 break;
 
