@@ -18,15 +18,6 @@ const Engine = {
     EHentai,
     Baidu,
     Google,
-    A2: Ascii2d,
-    SN: SauceNAO,
-    IQ: IqDB,
-    YD: Yandex,
-    TM: TraceMoe,
-    AT: AnimeTrace,
-    EH: EHentai,
-    BD: Baidu,
-    GL: Google
 };
 
 export default Engine;

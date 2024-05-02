@@ -28,7 +28,8 @@ const downloadImage = async (url) => {
 
         return filepath + filename;
     } catch (err) {
-        logger.error('[imgS-Plugin] 下载出错', err);
+        logger.error('下载待搜索图片失败', err);
+        return null;
     }
 };
 

@@ -25,7 +25,6 @@ async function Google(url) {
     const content = await page.content()
     await browser.close()
 
-    logger.warn(content)
     return parse(content)
 }
 
