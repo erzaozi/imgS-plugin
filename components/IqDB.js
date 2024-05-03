@@ -5,7 +5,10 @@ import _ from 'lodash';
 import Config from './Config.js';
 import { HttpsProxyAgent } from 'https-proxy-agent';
 
-const BASE_URL = 'https://iqdb.org/';
+const BASE_URLs = {
+    '2d': 'https://iqdb.org/',
+    '3d': 'https://3d.iqdb.org/'
+};
 
 async function IqDB(url) {
     const form = new FormData();
@@ -17,13 +20,11 @@ async function IqDB(url) {
         agent = new HttpsProxyAgent(proxy)
     }
 
-    const services = await Config.getConfig().IqDB.services;
     const discolor = await Config.getConfig().IqDB.discolor;
 
-    if (services) services.forEach((s, index) => form.append(`service.${index}`, s));
     if (discolor) form.append('forcegray', 'on');
 
-    const response = await fetch(BASE_URL, {
+    const response = await fetch(BASE_URLs[await Config.getConfig().IqDB.site], {
         method: 'POST',
         body: form,
         agent: agent,
@@ -46,8 +47,8 @@ function parse(body) {
             [, resolution] = content.match(/(\d+×\d+)/) ?? [];
 
         return {
-            url: new URL(link.attribs.href, BASE_URL).toString(),
-            image: new URL(image.attribs.src, BASE_URL).toString(),
+            url: new URL(link.attribs.href, BASE_URLs[Config.getConfig().IqDB.site]).toString(),
+            image: new URL(image.attribs.src, BASE_URLs[Config.getConfig().IqDB.site]).toString(),
             similarity: similarity ? parseFloat(similarity.replace('%', '')) : undefined,
             resolution,
             level: level ? level.toLowerCase() : undefined,

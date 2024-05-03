@@ -164,6 +164,18 @@ export function supportGuoba() {
           },
         },
         {
+          field: "IqDB.site",
+          label: "站点设置",
+          bottomHelpMessage: "选择搜索站点",
+          component: "Select",
+          componentProps: {
+            options: [
+              { label: "IqDB", value: '2d' },
+              { label: "3D IqDB", value: '3d' },
+            ],
+          },
+        },
+        {
           field: "IqDB.similarity",
           label: "相似度限制",
           bottomHelpMessage: "当结果小于此值时，将舍弃该结果（0-100）",
@@ -180,27 +192,6 @@ export function supportGuoba() {
           label: "搜索时去除颜色",
           bottomHelpMessage: "是否搜索时去除颜色",
           component: "Switch",
-        },
-        {
-          field: 'IqDB.services',
-          label: '图片数据来源',
-          component: "Select",
-          bottomHelpMessage: '选择图片数据来源',
-          componentProps: {
-            allowAdd: true,
-            allowDel: true,
-            mode: 'multiple',
-            options: [
-              { label: "Danbooru（动漫艺术作品）", value: 'danbooru' },
-              { label: "Konachan（动漫壁纸）", value: 'konachan' },
-              { label: "yande.re（高分辨率扫描）", value: 'yandere' },
-              { label: "Gelbooru（动漫艺术作品）", value: 'gelbooru' },
-              { label: "Sankaku Channel（动漫/漫画/游戏图像）", value: 'sankaku_channel' },
-              { label: "e-shuushuu（动漫/漫画/游戏图像）", value: 'e_shuushuu' },
-              { label: "Zerochan（动漫图片和壁纸）", value: 'zerochan' },
-              { label: "Anime-Pictures（动漫图片和壁纸）", value: 'anime_pictures' },
-            ],
-          },
         },
         {
           component: "Divider",

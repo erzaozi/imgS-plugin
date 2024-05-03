@@ -12,17 +12,9 @@ Ascii2d:
   type: color
   proxy: true
 IqDB:
+  site: 2d
   similarity: 80
   discolor: false
-  services:
-    - danbooru
-    - konachan
-    - yandere
-    - gelbooru
-    - sankaku_channel
-    - e_shuushuu
-    - zerochan
-    - anime_pictures
 Yandex:
   results: 3
   cookie: ''
