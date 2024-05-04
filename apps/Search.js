@@ -85,7 +85,7 @@ export class Search extends plugin {
     }
 
     async getImage() {
-        this.finish("getImage");
+        this.finish("getImage", this.e.isGroup);
         if (!this.e.img) {
             return this.reply("未能获取到图片，请重新发送搜图指令")
         } else {
