@@ -45,6 +45,9 @@ pnpm install --filter=imgS-plugin
 
 请使用 `#imgS帮助` 获取完整帮助
 
+> [!IMPORTANT]
+> 已支持无结果时自动切换引擎，请使用 [Guoba-plugin](https://github.com/guoba-yunzai/guoba-plugin) 更改搜图引擎顺序，默认顺序为：`SauceNAO` -> `IqDB` -> `Yandex` -> `Ascii2d`
+
 - [x] SauceNAO
 - [x] Ascii2d
 - [x] IqDB

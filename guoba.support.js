@@ -51,6 +51,27 @@ export function supportGuoba() {
           },
         },
         {
+          field: 'next',
+          label: '自动切换搜图引擎',
+          component: "Select",
+          bottomHelpMessage: '选择无结果时切换的搜图引擎',
+          componentProps: {
+            allowAdd: true,
+            allowDel: true,
+            mode: 'multiple',
+            options: [
+              { label: "SauceNAO", value: 'SauceNAO' },
+              { label: "Ascii2d", value: "Ascii2d" },
+              { label: "IqDB", value: "IqDB" },
+              { label: "Yandex", value: "Yandex" },
+              { label: "TraceMoe", value: "TraceMoe" },
+              { label: "AnimeTrace", value: "AnimeTrace" },
+              { label: "EHentai", value: "EHentai" },
+              { label: "Baidu", value: "Baidu"}
+            ],
+          },
+        },
+        {
           field: "safe_mode",
           label: "安全模式",
           bottomHelpMessage: "开启安全模式不会发送预览图，搜图速度更快",
@@ -383,7 +404,7 @@ export function supportGuoba() {
           lodash.set(config, keyPath, value)
         }
         config = lodash.merge({}, Config.getConfig(), config)
-        config.IqDB.services = data['IqDB.services']
+        config.next = data['next']
         Config.setConfig(config)
         return Result.ok({}, '保存成功~')
       },

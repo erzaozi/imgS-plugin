@@ -75,11 +75,7 @@ export class Search extends plugin {
         } else {
             await this.reply("正在使用 " + setEngine[e.user_id] + " 搜索引擎搜索图片，请稍等...")
             const msg = await this.load(e.img[0])
-            if (msg.length === 0) {
-                await e.reply("当前搜索引擎 " + setEngine[e.user_id] + " 未找到相关图片，换个搜索引擎试试吧？")
-                return true;
-            }
-            await e.reply(Bot.makeForwardMsg(msg))
+            await this.next(msg)
             return true;
         }
     }
@@ -91,12 +87,35 @@ export class Search extends plugin {
         } else {
             await this.reply("正在使用 " + setEngine[this.e.user_id] + " 搜索引擎搜索图片，请稍等...")
             const msg = await this.load(this.e.img[0])
-            if (msg.length === 0) {
-                await this.e.reply("当前搜索引擎 " + setEngine[this.e.user_id] + " 未找到相关图片，换个搜索引擎试试吧？")
-                return true;
-            }
-            await this.e.reply(Bot.makeForwardMsg(msg))
+            await this.next(msg)
+            return true;
         }
+    }
+
+    async next(msg, used = []) {
+
+        let engines = await Config.getConfig().next;
+
+        used.push(setEngine[this.e.user_id]);
+        engines = engines.filter(e => !used.includes(e));
+
+        if (msg.length !== 0) {
+            await this.e.reply(Bot.makeForwardMsg(msg));
+            return true;
+        }
+
+        if (engines.length === 0) {
+            await this.e.reply("已使用 " + used.join('/') + " 搜索引擎搜索图片，未找到相关图片，换个搜索引擎试试吧？")
+            return true;
+        }
+
+        let current = engines[0];
+        await this.e.reply("搜图引擎 " + setEngine[this.e.user_id] + " 未找到相关图片，正在使用 " + current + " 搜索引擎搜索图片，请稍等...");
+        setEngine[this.e.user_id] = current;
+
+        const newMsg = await this.load(this.e.img[0]);
+
+        this.next(newMsg, used);
     }
 
     async load(url) {

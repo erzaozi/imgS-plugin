@@ -1,4 +1,9 @@
 default: SauceNAO
+next: 
+  - SauceNAO
+  - IqDB
+  - Yandex
+  - Ascii2d
 safe_mode: true
 proxy:
   enable: false
