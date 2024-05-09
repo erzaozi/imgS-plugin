@@ -7,16 +7,17 @@ export function supportGuoba() {
   return {
     pluginInfo: {
       name: 'imgS-plugin',
-      title: 'imgS-plugin',
+      title: '以图搜源插件',
       author: ['@erzaozi', '@CikeyQi'],
       authorLink: ['https://github.com/erzaozi', 'https://github.com/CikeyQi'],
       link: 'https://github.com/erzaozi/imgS-plugin',
       isV3: true,
       isV2: false,
-      description: '基于Yunzai-Bot的以图搜图插件，整合图片识别API，用于以图搜源',
+      showInMenu: true,
+      description: '基于 Yunzai 的以图搜源插件',
       // 显示图标，此为个性化配置
       // 图标可在 https://icon-sets.iconify.design 这里进行搜索
-      icon: 'mdi:stove',
+      icon: 'twemoji:magnifying-glass-tilted-left',
       // 图标颜色，例：#FF0000 或 rgb(255, 0, 0)
       iconColor: '#d19f56',
       // 如果想要显示成图片，也可以填写图标路径（绝对路径）
