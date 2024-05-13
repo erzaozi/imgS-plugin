@@ -295,9 +295,9 @@ export class Search extends plugin {
                     })
                     break;
                 case "Google":
-                    response.forEach(async item => {
+                    response.slice(0, await Config.getConfig().Google.results).forEach(async item => {
                         if (!safe_mode) {
-                            messages.push({ message: [segment.image('base64://' + item.pic.replace('data:image/jpeg;base64,', ''))] });
+                            messages.push({ message: [segment.image(item.pic)] });
                         }
                         messages.push({ message: [`${item.title}\n` + (item.url ? `${item.url}` : '')] })
                     })
