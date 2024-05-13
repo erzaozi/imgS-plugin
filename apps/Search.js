@@ -30,7 +30,7 @@ export class Search extends plugin {
             rule: [
                 {
                     /** 命令正则匹配 */
-                    reg: '^[/#]?.*搜图$',
+                    reg: '^[/#]?.*搜图.*$',
                     /** 执行方法 */
                     fnc: 'search'
                 },
@@ -68,6 +68,10 @@ export class Search extends plugin {
         }
 
         setEngine[e.user_id] = Object.keys(Engine).find(key => e.msg.toLowerCase().includes(key.toLowerCase())) || Object.keys(lnk).find(key => lnk[key].some(alias => e.msg.toLowerCase().includes(alias.toLowerCase()))) || await Config.getConfig().default;
+
+        if (e.msg.match(/https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp)/)) {
+            e.img = [e.msg.match(/https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp)/)[0]];
+        }
 
         if (!e.img) {
             this.setContext("getImage", e.isGroup, 60, "操作已超时，请重新发送搜图指令");
