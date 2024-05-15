@@ -299,7 +299,7 @@ export class Search extends plugin {
                     })
                     break;
                 case "Google":
-                    response.slice(0, await Config.getConfig().Google.results).forEach(async item => {
+                    response.slice(1, (await Config.getConfig().Google.results) + 1).forEach(async item => {
                         if (!safe_mode) {
                             messages.push({ message: [segment.image(item.pic)] });
                         }

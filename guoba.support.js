@@ -388,10 +388,16 @@ export function supportGuoba() {
           },
         },
         {
-          field: "Google.safe",
-          label: "内容安全",
-          bottomHelpMessage: "开启后，搜索结果中将不会出现违规内容",
-          component: "Switch",
+          field: "Google.results",
+          label: "结果数限制",
+          bottomHelpMessage: "仅显示前 N 个结果",
+          component: "InputNumber",
+          componentProps: {
+            placeholder: '请输入结果数限制',
+            min: 0,
+            max: 100,
+            step: 1,
+          },
         },
       ],
       getConfigData() {
