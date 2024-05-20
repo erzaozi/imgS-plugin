@@ -5,6 +5,7 @@ next:
   - Yandex
   - Ascii2d
 safe_mode: true
+send_choice: false
 proxy:
   enable: false
   host: 127.0.0.1

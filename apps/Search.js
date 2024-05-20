@@ -67,7 +67,13 @@ export class Search extends plugin {
             }
         }
 
-        setEngine[e.user_id] = Object.keys(Engine).find(key => e.msg.toLowerCase().includes(key.toLowerCase())) || Object.keys(lnk).find(key => lnk[key].some(alias => e.msg.toLowerCase().includes(alias.toLowerCase()))) || await Config.getConfig().default;
+        if (e.msg.startsWith('/搜图') || e.msg.startsWith('#搜图') || e.msg.startsWith('搜图')) {
+            setEngine[e.user_id] = await Config.getConfig().default;
+        } else {
+            setEngine[e.user_id] = Object.keys(Engine).find(key => e.msg.toLowerCase().includes(key.toLowerCase())) || Object.keys(lnk).find(key => lnk[key].some(alias => e.msg.toLowerCase().includes(alias.toLowerCase())));
+        }
+
+        if (setEngine[e.user_id] === undefined) return false;
 
         if (e.msg.match(/https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp)/)) {
             e.img = [e.msg.match(/https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp)/)[0]];
@@ -114,7 +120,9 @@ export class Search extends plugin {
         }
 
         let current = engines[0];
-        await this.e.reply("搜图引擎 " + setEngine[this.e.user_id] + " 未找到相关图片，正在使用 " + current + " 搜索引擎搜索图片，请稍等...");
+        if (await Config.getConfig().send_choice) {
+            await this.e.reply("搜图引擎 " + setEngine[this.e.user_id] + " 未找到相关图片，正在使用 " + current + " 搜索引擎搜索图片，请稍等...");
+        }
         setEngine[this.e.user_id] = current;
 
         const newMsg = await this.load(this.e.img[0]);
