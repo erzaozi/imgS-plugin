@@ -73,6 +73,12 @@ export function supportGuoba() {
           },
         },
         {
+          field: "send_choice",
+          label: "发送切换引擎信息",
+          bottomHelpMessage: "不建议选择多个搜图引擎时开启，会导致刷屏",
+          component: "Switch",
+        },
+        {
           field: "safe_mode",
           label: "安全模式",
           bottomHelpMessage: "开启安全模式不会发送预览图，搜图速度更快",
