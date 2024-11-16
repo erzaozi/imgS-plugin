@@ -1,6 +1,6 @@
 {
   "name": "imgS-plugin",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "基于 Yunzai-Bot 的图片搜索插件",
   "main": "index.js",
   "scripts": {
@@ -12,6 +12,7 @@
     "cheerio": "1.0.0-rc.12",
     "fetch-blob": "^4.0.0",
     "formdata-polyfill": "^4.0.10",
+    "form-data": "^4.0.1",
     "https-proxy-agent": "^7.0.4",
     "jimp": "^0.22.12",
     "lodash": "^4.17.21",

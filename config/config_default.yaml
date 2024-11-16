@@ -41,3 +41,7 @@ Baidu:
   results: 3
 Google:
   results: 3
+NHentai:
+  factor: false
+  similarity: 80
+  results: 3

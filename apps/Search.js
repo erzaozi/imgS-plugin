@@ -15,6 +15,7 @@ const lnk = {
     'EHentai': ['exhentai', 'eh', 'ex'],
     'Baidu': ['bd'],
     'Google': ['gg', 'gl', 'go'],
+    'NHentai': ['nh', 'nhentai'],
 }
 
 export class Search extends plugin {
@@ -312,6 +313,17 @@ export class Search extends plugin {
                             messages.push({ message: [segment.image(item.pic)] });
                         }
                         messages.push({ message: [`${item.title}\n` + (item.url ? `${item.url}` : '')] })
+                    })
+                    break;
+                case "NHentai":
+                    response.slice(0, (await Config.getConfig().NHentai.results) + 1).forEach(async item => {
+                        const simLimit = await Config.getConfig().NHentai.similarity;
+                        if (item.similarity < simLimit) return;
+
+                        if (!safe_mode) {
+                            messages.push({ message: [segment.image(item.previewImageUrl)] });
+                        }
+                        messages.push({ message: `标题：${item.title}\n\n${item.source === 'nhentai' ? `链接：https://nhentai.net${item.pagePath}\n链接：https://nhentai.xxx${item.pagePath}` : item.source === 'ehentai' ? `链接：https://e-hentai.org${item.pagePath}\n链接：https://exhentai.org${item.pagePath}` : `链接：https://panda.chaika.moe${item.pagePath}`}` })
                     })
                     break;
 

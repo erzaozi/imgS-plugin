@@ -47,7 +47,8 @@ export function supportGuoba() {
               { label: "TraceMoe", value: "TraceMoe" },
               { label: "AnimeTrace", value: "AnimeTrace" },
               { label: "EHentai", value: "EHentai" },
-              { label: "Baidu", value: "Baidu"}
+              { label: "Baidu", value: "Baidu"},
+              { label: "NHentai", value: "NHentai"}
             ],
           },
         },
@@ -68,7 +69,8 @@ export function supportGuoba() {
               { label: "TraceMoe", value: "TraceMoe" },
               { label: "AnimeTrace", value: "AnimeTrace" },
               { label: "EHentai", value: "EHentai" },
-              { label: "Baidu", value: "Baidu"}
+              { label: "Baidu", value: "Baidu"},
+              { label: "NHentai", value: "NHentai"}
             ],
           },
         },
@@ -395,6 +397,44 @@ export function supportGuoba() {
         },
         {
           field: "Google.results",
+          label: "结果数限制",
+          bottomHelpMessage: "仅显示前 N 个结果",
+          component: "InputNumber",
+          componentProps: {
+            placeholder: '请输入结果数限制',
+            min: 0,
+            max: 100,
+            step: 1,
+          },
+        },
+        {
+          component: "Divider",
+          label: "NHentai 相关配置",
+          componentProps: {
+            orientation: "left",
+            plain: true,
+          },
+        },
+        {
+          field: "NHentai.factor",
+          label: "严格搜索模式",
+          bottomHelpMessage: "开启后，使用严格搜索模式",
+          component: "Switch",
+        },
+        {
+          field: "NHentai.similarity",
+          label: "相似度限制",
+          bottomHelpMessage: "当结果小于此值时，将舍弃该结果（0-100）",
+          component: "InputNumber",
+          componentProps: {
+            placeholder: '请输入相似度限制',
+            min: 0,
+            max: 100,
+            step: 1,
+          },
+        },
+        {
+          field: "NHentai.results",
           label: "结果数限制",
           bottomHelpMessage: "仅显示前 N 个结果",
           component: "InputNumber",
