@@ -6,7 +6,7 @@ import Config from './Config.js';
 import { HttpsProxyAgent } from 'https-proxy-agent';
 import Jimp from 'jimp';
 
-const BASE_URL = 'https://aiapiv2.animedb.cn/ai/api/detect';
+const BASE_URL = 'https://api.animetrace.com/v1/search';
 
 async function AnimeTrace(url) {
     const imagePath = await downloadImage(url);
