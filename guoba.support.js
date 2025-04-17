@@ -48,6 +48,7 @@ export function supportGuoba() {
               { label: "AnimeTrace", value: "AnimeTrace" },
               { label: "EHentai", value: "EHentai" },
               { label: "Baidu", value: "Baidu"},
+              { label: "Google", value: "Google"},
               { label: "NHentai", value: "NHentai"}
             ],
           },
@@ -70,6 +71,7 @@ export function supportGuoba() {
               { label: "AnimeTrace", value: "AnimeTrace" },
               { label: "EHentai", value: "EHentai" },
               { label: "Baidu", value: "Baidu"},
+              { label: "Google", value: "Google"},
               { label: "NHentai", value: "NHentai"}
             ],
           },
