@@ -31,7 +31,7 @@ export class Search extends plugin {
             rule: [
                 {
                     /** 命令正则匹配 */
-                    reg: '^[/#]?.*搜图.*$',
+                    reg: '^[/#]?(.*)搜图.*$',
                     /** 执行方法 */
                     fnc: 'search'
                 },
@@ -71,7 +71,8 @@ export class Search extends plugin {
         if (e.msg.startsWith('/搜图') || e.msg.startsWith('#搜图') || e.msg.startsWith('搜图')) {
             setEngine[e.user_id] = await Config.getConfig().default;
         } else {
-            setEngine[e.user_id] = Object.keys(Engine).find(key => e.msg.toLowerCase().includes(key.toLowerCase())) || Object.keys(lnk).find(key => lnk[key].some(alias => e.msg.toLowerCase().includes(alias.toLowerCase())));
+            let msg = e.msg.match(this.rule[0].reg)[1]
+            setEngine[e.user_id] = Object.keys(Engine).find(key => msg.toLowerCase().includes(key.toLowerCase())) || Object.keys(lnk).find(key => lnk[key].some(alias => msg.toLowerCase().includes(alias.toLowerCase())));
         }
 
         if (setEngine[e.user_id] === undefined) return false;
@@ -308,11 +309,11 @@ export class Search extends plugin {
                     })
                     break;
                 case "Google":
-                    response.slice(1, (await Config.getConfig().Google.results) + 1).forEach(async item => {
+                    response.slice(0, (await Config.getConfig().Google.results) + 1).forEach(async item => {
                         if (!safe_mode) {
-                            messages.push({ message: [segment.image(item.pic)] });
+                            messages.push({ message: [segment.image('base64://' + item.image)] });
                         }
-                        messages.push({ message: [`${item.title}\n` + (item.url ? `${item.url}` : '')] })
+                        messages.push({ message: [`${item.title}\n` + (item.link ? `${item.link}` : '')] })
                     })
                     break;
                 case "NHentai":
@@ -329,6 +330,9 @@ export class Search extends plugin {
 
                 default:
                     break;
+            }
+            if (messages.length > 0) {
+                messages.unshift({ message: `以下搜索结果来自 ${setEngine[this.e.user_id]}` });
             }
         } catch (error) {
             logger.error('[' + setEngine[this.e.user_id] + '] 返回错误：' + error);

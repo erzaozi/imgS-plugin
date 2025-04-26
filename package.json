@@ -1,6 +1,6 @@
 {
   "name": "imgS-plugin",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "基于 Yunzai-Bot 的图片搜索插件",
   "main": "index.js",
   "scripts": {
