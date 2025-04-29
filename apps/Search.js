@@ -300,10 +300,10 @@ export class Search extends plugin {
                         let msg = [];
 
                         if (!safe_mode) {
-                            messages.push({ message: [segment.image(item.thumbUrl)] });
+                            messages.push({ message: [segment.image(item.image_src)] });
                         }
                         msg.push(`图片大小：${item.width} × ${item.height}\n`);
-                        msg.push(`图片地址：${item.fromUrl}\n`);
+                        msg.push(`图片地址：${item.url}`);
 
                         messages.push({ message: msg.join('') });
                     })

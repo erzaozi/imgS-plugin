@@ -6,7 +6,7 @@ import Config from './Config.js';
 import { HttpsProxyAgent } from 'https-proxy-agent';
 import { load } from 'cheerio';
 
-const BAIDU_GRAPH_URL = 'https://graph.baidu.com/upload?from=pc';
+const BAIDU_GRAPH_URL = 'https://graph.baidu.com/upload';
 
 function extractCardData(html) {
     const $ = load(html);
@@ -37,10 +37,10 @@ async function Baidu(url) {
 
         const jsonResponse = await response.json();
         if (jsonResponse.status !== 0) {
-            return { data: {}, redirectUrl: response.url };
+            throw new Error('返回状态异常 ' + jsonResponse.status);
         }
 
-        const nextUrl = jsonResponse.data.url;
+        const nextUrl = jsonResponse.data.url + '&tpl_from=pc';
 
         response = await fetch(nextUrl, { method: 'GET', agent: agent });
         cardData = extractCardData(await response.text());
@@ -50,18 +50,13 @@ async function Baidu(url) {
         }
 
         for (const card of cardData) {
-            if (card.cardName === 'noresult') {
-                return [];
-            }
-            if (card.cardName === 'simipic') {
-                const simipicRes = await fetch(card.tplData.firstUrl, { method: 'GET', agent: agent });
-                return simipicRes.json().then((data) => {
-                    return data.data.list
-                })
+            if (card.cardName === 'same') {
+                return card.tplData.list
             }
         }
+        return [];
     } catch (error) {
-        throw new Error('[Baidu] ' + error.message);
+        throw new Error(error.message);
     }
 }
 
