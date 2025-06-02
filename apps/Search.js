@@ -82,7 +82,7 @@ export class Search extends plugin {
         }
 
         if (!e.img) {
-            this.setContext("getImage", e.isGroup, 60, "操作已超时，请重新发送搜图指令");
+            this.setContext("getImage", false, 60, "操作已超时，请重新发送搜图指令");
             return this.reply("请发送你要搜索的图片")
         } else {
             await this.reply("正在使用 " + setEngine[e.user_id] + " 搜索引擎搜索图片，请稍等...")
@@ -93,7 +93,7 @@ export class Search extends plugin {
     }
 
     async getImage() {
-        this.finish("getImage", this.e.isGroup);
+        this.finish("getImage", false);
         if (!this.e.img) {
             return this.reply("未能获取到图片，请重新发送搜图指令")
         } else {
