@@ -8,7 +8,7 @@ const yunzaiVersion = packageJson.version
 const pluginVersion = pluginPackageJson.version
 const isMiao = packageJson.name === 'miao-yunzai'
 const isMangoCat = packageJson.name === 'MangoCat-Yunzai'
-const isTrss = Array.isArray(Bot.uin) ? true : false
+const isTrss = Array.isArray(Bot.uin) && !isMangoCat
 
 let Version = {
   isMiao,
